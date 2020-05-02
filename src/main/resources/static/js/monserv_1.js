@@ -41,14 +41,14 @@ var app = {
 
             success: function (resultFeatObjList) {
                 console.log(resultFeatObjList);
-                if (resultFeatObjList === "") {
+                if (resultFeatObjList === null) {
                     window.location.href = "index.html";
                 }
 
                 var featObjListStr = JSON.stringify(resultFeatObjList, null, '\t');
                 var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'serv': serv, 'featObjListStr': featObjListStr};
                 window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
-                window.location.href = "splunkserv.html";
+                window.location.href = "monserv.html";
 
             }
         });

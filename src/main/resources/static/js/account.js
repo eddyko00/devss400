@@ -19,7 +19,7 @@ var app = {
         console.log(iisWebObj);
 
         var custObjStr = iisWebObj.custObjStr;
-        if (custObjStr == null) {
+        if (typeof custObjStr === null) {
             window.location.href = "index.html";
         }
         var custObj = JSON.parse(custObjStr);
@@ -31,7 +31,7 @@ var app = {
         htmlAdmin += '<button id="regressionbtn"  >QA Regression Testing</button>';
         $("#adminid").html(htmlAdmin);
         if (custObj.type == 99) {
-            var htmlAdmin = '<button id="lockbtn" >Lock</button>';
+            var htmlAdmin = '<br><br><button id="lockbtn" >Lock</button>';
             htmlAdmin += '<button id="serverbtn"  >Server</button>';
             $("#adminid").append(htmlAdmin);
         }
@@ -39,12 +39,27 @@ var app = {
         $("#accheader").html("User Account");
 
 
+        $("#monitorbtn").click(function () {
+            var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr};
+            window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
+            window.location.href = "monanalyize.html";
+            return;
+        });
+
         $("#splunkbtn").click(function () {
             var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr};
             window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
             window.location.href = "splunkanalyize.html";
             return;
         });
+
+        $("#regressionbtn").click(function () {
+            var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr};
+            window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
+            window.location.href = "reganalyize.html";
+            return;
+        });
+
 
         $("#lockbtn").click(function () {
 
@@ -81,7 +96,7 @@ var app = {
                 cache: false,
                 success: function (resultLockObjList) {
                     console.log(resultLockObjList);
-                    if (resultLockObjList == null) {
+                    if (resultLockObjList === null) {
                         window.location.href = "#page-lock";
                     }
                     $("#lockid").html(' ');
@@ -108,7 +123,7 @@ var app = {
                 cache: false,
                 success: function (resultServerList) {
                     console.log(resultServerList);
-                    if (resultServerList == null) {
+                    if (resultServerList === null) {
                         window.location.href = "#page-lock";
                     }
                     $("#serverid").html(" ");
@@ -132,7 +147,7 @@ var app = {
         });
 
 
-    },
+    }
 };
 app.initialize();
 

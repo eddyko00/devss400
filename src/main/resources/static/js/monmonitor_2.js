@@ -24,10 +24,12 @@ var app = {
         var custObj = JSON.parse(custObjStr);
         var servObjListStr = iisWebObj.servObjListStr;
         var servObjList = JSON.parse(servObjListStr);
-        var serv = iisWebObj.serv;
-
+        var resultMonObjListStr = iisWebObj.resultMonObjListStr;
+        var resultMonObjList = JSON.parse(resultMonObjListStr);
+        
+        var monCmd = iisWebObj.monCmd;
         $.ajax({
-            url: iisurl + "/cust/" + custObj.username + "/id/" + custObj.id + "/serv/" + serv + "/featureall",
+            url: iisurl + "/cust/" + custObj.username + "/id/" + custObj.id + "/mon/"+monCmd,
             crossDomain: true,
             cache: false,
             beforeSend: function () {
@@ -39,16 +41,16 @@ var app = {
                 window.location.href = "index.html";
             },
 
-            success: function (resultFeatObjList) {
-                console.log(resultFeatObjList);
-                if (resultFeatObjList === "") {
+            success: function (resultObjList) {
+//                console.log(resultMonObjList);
+                alert ("Return Status " + resultObjList);
+                if (resultObjList === null) {
                     window.location.href = "index.html";
                 }
 
-                var featObjListStr = JSON.stringify(resultFeatObjList, null, '\t');
-                var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'serv': serv, 'featObjListStr': featObjListStr};
+                var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'resultMonObjListStr': resultMonObjListStr};
                 window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
-                window.location.href = "splunkserv.html";
+                window.location.href = "monmonitor_1.html";
 
             }
         });

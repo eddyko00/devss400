@@ -18,7 +18,7 @@ var app = {
         console.log(iisWebObj);
 
         var custObjStr = iisWebObj.custObjStr;
-        if (custObjStr === null) {
+        if (typeof custObjStr === null) {
             window.location.href = "index.html";
         }
         var custObj = JSON.parse(custObjStr);
@@ -28,7 +28,7 @@ var app = {
         var featObjListStr = iisWebObj.featObjListStr;
         var featObjList = JSON.parse(featObjListStr);
 
-        $("#accheader").html("Splunk ("+ serv + ") Feature");
+        $("#accheader").html("Mon (" + serv + ") Feature");
 
         $("#myid").html(" "); //clear the field
         for (i = 0; i < featObjList.length; i += 2) {
@@ -57,8 +57,10 @@ var app = {
             var feat = featObjList[accId - 10];
             var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'serv': serv, 'feat': feat};
             window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
-            window.location.href = "splunkServFeat_1.html";
+            window.location.href = "monservfeat_1.html";
         });
+
+
 
     }
 };

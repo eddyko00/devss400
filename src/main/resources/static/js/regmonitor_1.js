@@ -27,7 +27,7 @@ var app = {
         var serv = iisWebObj.serv;
 
         $.ajax({
-            url: iisurl + "/cust/" + custObj.username + "/id/" + custObj.id + "/serv/" + serv + "/featureall",
+            url: iisurl + "/cust/" + custObj.username + "/id/" + custObj.id + "/regression",
             crossDomain: true,
             cache: false,
             beforeSend: function () {
@@ -39,16 +39,16 @@ var app = {
                 window.location.href = "index.html";
             },
 
-            success: function (resultFeatObjList) {
-                console.log(resultFeatObjList);
-                if (resultFeatObjList === "") {
+            success: function (resultMonObjList) {
+//                console.log(resultMonObjList);
+                if (resultMonObjList === null) {
                     window.location.href = "index.html";
                 }
 
-                var featObjListStr = JSON.stringify(resultFeatObjList, null, '\t');
-                var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'serv': serv, 'featObjListStr': featObjListStr};
+                var resultMonObjListStr = JSON.stringify(resultMonObjList, null, '\t');
+                var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'serv': serv, 'resultMonObjListStr': resultMonObjListStr};
                 window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
-                window.location.href = "splunkserv.html";
+                window.location.href = "regmonitor.html";
 
             }
         });

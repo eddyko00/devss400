@@ -8,8 +8,6 @@ var app = {
 
         });
 
-
-
         var iisWebSession = "iisWebSession";
         iisurl = iisurl.replace("abc", "");
         iisurl = iisurl.replace("abc", "");
@@ -20,13 +18,14 @@ var app = {
         console.log(iisWebObj);
 
         var custObjStr = iisWebObj.custObjStr;
-        if (custObjStr == null) {
+        if (custObjStr === null) {
             window.location.href = "index.html";
         }
         var custObj = JSON.parse(custObjStr);
         var servObjListStr = iisWebObj.servObjListStr;
         var servObjList = JSON.parse(servObjListStr);
 
+        
         $("#myid").html(" "); //clear the field
         for (i = 0; i < servObjList.length; i+=2) {
             var servName = servObjList[i+1];
@@ -44,7 +43,7 @@ var app = {
 //            alert($(this).text()); // gets text contents of clicked li
             var accId = $(this).attr('id');
             console.log(accId);
-            if (accId == 0) {
+            if (accId === 0) {
 //                alert(accId);
                 return;
             }
@@ -56,7 +55,7 @@ var app = {
 
 
 
-    },
+    }
 };
 app.initialize();
 

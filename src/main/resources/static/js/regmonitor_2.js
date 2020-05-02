@@ -24,10 +24,19 @@ var app = {
         var custObj = JSON.parse(custObjStr);
         var servObjListStr = iisWebObj.servObjListStr;
         var servObjList = JSON.parse(servObjListStr);
+        var resultMonObjListStr = iisWebObj.resultMonObjListStr;
+        var resultMonObjList = JSON.parse(resultMonObjListStr);
         var serv = iisWebObj.serv;
-
+        var url = iisWebObj.url;
+        var monCmd = iisWebObj.monCmd;
+        
+        if (monCmd === 'start') {
+            alert ('start regression using url='+url);
+        }
+        
         $.ajax({
-            url: iisurl + "/cust/" + custObj.username + "/id/" + custObj.id + "/serv/" + serv + "/featureall",
+            url: iisurl + "/cust/" + custObj.username + "/id/" + custObj.id
+                    + "/regression/" + monCmd + "?app=" + serv + "&url=" + url,
             crossDomain: true,
             cache: false,
             beforeSend: function () {
@@ -39,16 +48,24 @@ var app = {
                 window.location.href = "index.html";
             },
 
-            success: function (resultFeatObjList) {
-                console.log(resultFeatObjList);
-                if (resultFeatObjList === "") {
+            success: function (resultObjList) {
+//                console.log(resultMonObjList);
+                if (resultObjList === 1) {
+                    alert("Return Status - Successful");
+
+                } else if (resultObjList === 10) {
+                    alert("Return Status - Already started");
+                } else {
+                    alert("Return Status " + resultObjList);
+                }
+                if (resultObjList === null) {
                     window.location.href = "index.html";
                 }
 
-                var featObjListStr = JSON.stringify(resultFeatObjList, null, '\t');
-                var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'serv': serv, 'featObjListStr': featObjListStr};
+                var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 
+                    'serv': serv, 'resultMonObjListStr': resultMonObjListStr};
                 window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
-                window.location.href = "splunkserv.html";
+                window.location.href = "regmonitor_1.html";
 
             }
         });
