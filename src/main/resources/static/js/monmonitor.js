@@ -77,8 +77,10 @@ var app = {
 
 
         $("ul[id*=myid] li").click(function () {
-//            alert($(this).html()); // gets innerHTML of clicked li
-//            alert($(this).text()); // gets text contents of clicked li
+            if (custObj.username.toUpperCase() === "GUEST") {
+                alert("Please register a Dev user to access this operation");
+                return;
+            }
             var objId = $(this).attr('id');
             console.log(objId);
             if (objId === 0) {
@@ -110,6 +112,10 @@ var app = {
         });
 
         $("#stopbtn").click(function () {
+            if (custObj.type !== 99) {
+                alert("Only Admin user supprots this operation");
+                return;
+            }
             var monCmd = 'stop';
             var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'resultMonObjListStr': resultMonObjListStr, 'monCmd': monCmd};
             window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
@@ -118,6 +124,10 @@ var app = {
         });
 
         $("#startbtn").click(function () {
+            if (custObj.type !== 99) {
+                alert("Only Admin user supprots this operation");
+                return;
+            }            
             var monCmd = 'start';
             var iisWebObj = {'custObjStr': custObjStr, 'servObjListStr': servObjListStr, 'resultMonObjListStr': resultMonObjListStr, 'monCmd': monCmd};
             window.localStorage.setItem(iisWebSession, JSON.stringify(iisWebObj));
