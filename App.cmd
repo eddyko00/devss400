@@ -1,1 +1,1 @@
-java -jar -DBUILD_DT=2018-12-31 target\heroku-demo-0.0.1-SNAPSHOT.jar
+java -jar target\spring-boot-web-application-bootstrap-jquery-0.0.1-SNAPSHOT.jar
