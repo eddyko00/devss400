@@ -18,7 +18,7 @@ var app = {
         console.log(iisWebObj);
 
         var custObjStr = iisWebObj.custObjStr;
-        if (custObjStr === null) {
+        if (custObjStr == null) {
             window.location.href = "index.html";
         }
         var custObj = JSON.parse(custObjStr);
@@ -44,7 +44,7 @@ var app = {
             success: function (resultObjList) {
 //                console.log(resultMonObjList);
                 alert ("Return Status " + resultObjList);
-                if (resultObjList === null) {
+                if (resultObjList == null) {
                     window.location.href = "index.html";
                 }
 

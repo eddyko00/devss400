@@ -18,7 +18,7 @@ var app = {
         console.log(iisWebObj);
 
         var custObjStr = iisWebObj.custObjStr;
-        if (typeof custObjStr === null) {
+        if (typeof custObjStr == null) {
             window.location.href = "index.html";
         }
         var custObj = JSON.parse(custObjStr);
@@ -86,10 +86,10 @@ var app = {
 //            alert($(this).text()); // gets text contents of clicked li
             var objId = $(this).attr('id');
             console.log(objId);
-            if (objId === 0) {
+            if (objId == 0) {
                 return;
             }
-            if (reportTCList === null) {
+            if (reportTCList == null) {
                 return;
             }
             var report = reportTCList[objId - 10];
@@ -114,7 +114,7 @@ var app = {
 
                 success: function (resultObj) {
 //                console.log(resultMonObjList);
-                    if (resultObj === null) {
+                    if (resultObj == null) {
                         window.location.href = "index.html";
                     }
 

@@ -18,7 +18,7 @@ var app = {
         console.log(iisWebObj);
 
         var custObjStr = iisWebObj.custObjStr;
-        if (typeof custObjStr === null) {
+        if (typeof custObjStr == null) {
             window.location.href = "index.html";
         }
         var custObj = JSON.parse(custObjStr);
@@ -28,14 +28,14 @@ var app = {
         var resultMonObjListStr = iisWebObj.resultMonObjListStr;
         var resultMonObjList = JSON.parse(resultMonObjListStr);
         $("#myid").html("<h4>Regresion test on " + serv + "</h4>"); //clear the field
-        if (resultMonObjList !== null) {
+        if (resultMonObjList != null) {
             for (i = 0; i < resultMonObjList.length; i++) {
                 var monObj = resultMonObjList[i];
                 var objId = i + 10;
                 var htmlSt = '<div class="ui-grid-b">';
                 htmlSt += '<div class="ui-block-a" style="width:10%" >' + monObj.uid + '</div>';
                 var statusSt = 'started';
-                if (monObj.status === 5) {
+                if (monObj.status == 5) {
                     statusSt = 'completed';
                 }
                 htmlSt += '<div class="ui-block-b" style="width:15%" >' + statusSt + '</div>';
@@ -82,7 +82,7 @@ var app = {
 //            alert($(this).text()); // gets text contents of clicked li
             var objId = $(this).attr('id');
             console.log(objId);
-            if (objId === 0) {
+            if (objId == 0) {
                 return;
             }
             var monObj = resultMonObjList[objId - 10];
@@ -112,7 +112,7 @@ var app = {
         });
 
         $("#stopbtn").click(function () {
-            if (custObj.type === 99) {
+            if (custObj.type == 99) {
                 alert("Only Dev user supprots this operation");
                 return;
             }            
@@ -126,7 +126,7 @@ var app = {
         });
 
         $("#startbtn").click(function () {
-            if (custObj.type === 99) {
+            if (custObj.type == 99) {
                 alert("Only Dev user supprots this operation");
                 return;
             }                
